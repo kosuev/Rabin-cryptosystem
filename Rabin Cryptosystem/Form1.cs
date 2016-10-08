@@ -30,6 +30,11 @@ namespace Rabin_Cryptosystem
             while ((p%4!=3) || (q%4!=3)||(prime(p)!=true)||(prime(q)!=true));
             int n = p * q;
 
+            //encrypt-decrypt
+            string shifr = null;
+            string opentxt = OpentxtBox.Text;
+            
+
         }
 
         bool prime(int n)
@@ -38,6 +43,13 @@ namespace Rabin_Cryptosystem
                 if (n % i == 0)
                     return false;
             return true;
+        }
+        static int F_Pow(int x, int y, int mod)
+        {
+            int rez = 1;
+            for (int i = 0; i < y; i++)
+                rez = (rez * x) % mod;
+            return (rez);
         }
     }
 }
