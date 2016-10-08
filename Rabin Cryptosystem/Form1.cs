@@ -30,10 +30,25 @@ namespace Rabin_Cryptosystem
             while ((p%4!=3) || (q%4!=3)||(prime(p)!=true)||(prime(q)!=true));
             int n = p * q;
 
-            //encrypt-decrypt
+            //encrypt
             string shifr = null;
+            int xmsg, ymsg; ;
+            string msg1 = null, msg2 = null, msg3 = null, msg4 = null;
             string opentxt = OpentxtBox.Text;
-            
+            for (int i = 0; i < opentxt.Length; i++)
+            {
+                shifr = shifr + Convert.ToChar(F_Pow(Convert.ToInt16(opentxt[i]), 2, n));
+            }
+            ShifrtxtBox.Text = shifr;
+            //decrypt
+            int k = (p + 1) / 4;
+            int l = (q + 1) / 4;
+            for (int i = 0; i < opentxt.Length; i++)
+            {
+                xmsg = F_Pow(Convert.ToInt16(shifr[i]), k, p);
+                ymsg = F_Pow(Convert.ToInt16(shifr[i]), l, q);
+                
+            }
 
         }
 
