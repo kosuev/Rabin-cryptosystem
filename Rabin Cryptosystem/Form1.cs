@@ -19,6 +19,16 @@ namespace Rabin_Cryptosystem
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Random rand = new Random();
+            int p;
+            int q;
+            do
+            {
+                p = rand.Next(1, 99);
+                q = rand.Next(1, 99);
+            }
+            while ((p%4!=3) || (q%4!=3)||(prime(p)!=true)||(prime(q)!=true));
+            int n = p * q;
 
         }
 
