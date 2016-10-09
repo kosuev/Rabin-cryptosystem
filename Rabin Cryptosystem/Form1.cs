@@ -31,9 +31,7 @@ namespace Rabin_Cryptosystem
             int n = p * q;
 
             //encrypt
-            string shifr = null;
-            int xmsg, ymsg; ;
-            string msg1 = null, msg2 = null, msg3 = null, msg4 = null;
+            string shifr = null;            
             string opentxt = OpentxtBox.Text;
             for (int i = 0; i < opentxt.Length; i++)
             {
@@ -43,12 +41,15 @@ namespace Rabin_Cryptosystem
             //decrypt
             int k = (p + 1) / 4;
             int l = (q + 1) / 4;
-            for (int i = 0; i < opentxt.Length; i++)
+            //China function
+            for (int i=0; i<shifr.Length;i++)
             {
-                xmsg = F_Pow(Convert.ToInt16(shifr[i]), k, p);
-                ymsg = F_Pow(Convert.ToInt16(shifr[i]), l, q);
-                
+                int x = F_Pow(Convert.ToInt16(shifr[i]), k, p);
+                int y = F_Pow(Convert.ToInt16(shifr[i]), l, q);
             }
+
+
+            //********
 
         }
 
@@ -65,6 +66,30 @@ namespace Rabin_Cryptosystem
             for (int i = 0; i < y; i++)
                 rez = (rez * x) % mod;
             return (rez);
+        }
+        static int Mod(int key, int mod)
+        {
+            int x = mod;
+            int a0 = 1, b0 = 0, a = 0, b = 1;
+            int bufa, bufb;
+
+            while (key % mod != 0)
+            {
+                int d = key / mod;
+                int с = key % mod;
+                bufa = a;
+                bufb = b;
+                a = a0 - a * d;
+                b = b0 - b * d;
+                key = mod;
+                mod = с;
+                a0 = bufa;
+                b0 = bufb;
+            }
+            if (a < 0)
+                return (a + x);
+            else
+                return (a);
         }
     }
 }
